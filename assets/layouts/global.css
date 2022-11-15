@@ -1,0 +1,9 @@
+  @font-face {
+    font-family: "Jost";
+    font-style: normal;
+    src: local("Jost"), url('@/assets/fonts/Jost/Jost-Regular.ttf') format("truetype");
+  }
+
+  body {
+    font-family: "Jost";
+ }
