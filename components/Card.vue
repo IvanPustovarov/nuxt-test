@@ -5,17 +5,21 @@
       class="mb-2 card"
     >
     <Promo :sticker="product.stickers[0].text" :type="product.stickers[0].type" />
-    <div class="img">
-      <b-card-img :src="product.image" alt="Image" class="rounded-0"></b-card-img>
-    </div>
+    <b-link href="#" class="card-link">
+      <div class="img">
+        <b-card-img :src="product.image" alt="Image" class="rounded-0"></b-card-img>
+      </div>
+    </b-link>
 
     <b-card-text class="article">
       {{product.article}}
     </b-card-text>
 
-    <b-card-text class="name">
-      {{product.category}}
-    </b-card-text>
+    <b-link href="#" class="link">
+        <b-card-text class="name">
+          {{product.category}}
+        </b-card-text>
+    </b-link>
 
     <b-form-rating
       :value="product.rating"
@@ -25,6 +29,12 @@
       readonly
       class="raiting"
     >
+    <template #icon-full>
+      <StarFill />
+    </template>
+    <template #icon-empty>
+      <StarEmpty />
+    </template>
     </b-form-rating>
 
     <div class="prices">
@@ -37,13 +47,17 @@
     </div>
 
 
-    <div class="button-like">
-        <b-button href="#" class="button-buy">
-          <BIconCart3 />
+    <div class="button-buy">
+        <b-button href="#" class="buy">
+          <img src="~assets/svg/card.svg" />
         </b-button>
         <div class="like">
-          <BIconHeart width="30px" height="30px" color="#D2D2D2"/>
-          <BIconReception4 width="30px" height="30px" color="#D2D2D2"/>
+          <b-button href="#" class="item">
+           <img src="~assets/svg/heart.svg" />
+          </b-button>
+           <b-button href="#" class="item">
+            <img src="~assets/svg/bar.svg" />
+          </b-button>
         </div>
     </div>
   </b-card>
@@ -51,7 +65,9 @@
 </template>
 
 <script>
-import { BIcon, BIconCart3, BIconHeart, BIconReception4 } from 'bootstrap-vue'
+import { BIcon } from 'bootstrap-vue'
+import StarFill from "~/assets/svg/star-fill.svg?inline";
+import StarEmpty from "~/assets/svg/star-empty.svg?inline";
 import Promo from './Promo.vue';
 export default {
   name: "CardComponent",
@@ -63,10 +79,9 @@ export default {
   },
   components: {
     BIcon,
-    BIconCart3,
-    BIconHeart,
-    BIconReception4,
-    Promo
+    Promo,
+    StarFill,
+    StarEmpty
   },
   computed: {},
   mounted () {},
@@ -76,27 +91,31 @@ export default {
 
 <style lang="scss" scoped>
   .card{
-    padding: 40px;
-    max-width: 380px;
-    height: 100%;
+    max-width: 300px;
+    min-height: 630px;
+    margin: 0 0.5rem 0 0.5rem;
     .img{
       overflow: hidden;
-      height: 350px;
+      height: 275px;
     }
     .article{
       margin-top: 1rem;
       color: #969696;
       font-size: 16px;
     }
+    .link{
+      text-decoration: none;
+      color: black;
     .name{
       font-size: 22px;
       line-height: 24px;
+    }
     }
     .raiting{
       padding: 0;
     }
     .prices{
-      margin: 15px 0 25px 0;
+      margin: 15px 0 20px 0;
       display: flex;
       flex-direction: column;
       .old-price{
@@ -113,12 +132,13 @@ export default {
         color: #000000;
       }
     }
-    .button-like{
+    .button-buy{
       display: flex;
       flex-direction: row;
-      gap: 30px;
       align-items: center;
-        .button-buy{
+      position: fixed;
+      bottom: 30px;
+        .buy{
           background: #2E3B6E;
           border-radius: 10px;
           width: 100px;
@@ -130,7 +150,13 @@ export default {
         .like {
           display: flex;
           flex-direction: row;
-          gap: 30px;
+          margin-left: 20px;
+          gap: 20px;
+          .item{
+            background: white;
+            border: none;
+            padding: 0;
+          }
         }
     }
   }
