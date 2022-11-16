@@ -46,4 +46,11 @@ export default {
   color: white;
   text-align: center;
 }
+
+@media screen and (max-width: 390px) {
+  .container {
+    top: 5px;
+    left: 15px;
+  }
+}
 </style>

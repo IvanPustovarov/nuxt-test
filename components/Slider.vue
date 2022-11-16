@@ -48,9 +48,28 @@ export default {
               }
             },
             {
-              "breakpoint": 390,
+              "breakpoint": 1150,
+              "settings": {
+                "slidesToShow": 3,
+              }
+            },
+            {
+              "breakpoint": 910,
+              "settings": {
+                "slidesToShow": 2,
+              }
+            },
+            {
+              "breakpoint": 610,
               "settings": {
                 "slidesToShow": 1,
+              }
+            },
+            {
+              "breakpoint": 390,
+              "settings": {
+                 "slidesToShow": 1,
+                "dots": false,
               }
             }
           ]

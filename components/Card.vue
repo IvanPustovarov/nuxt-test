@@ -6,8 +6,8 @@
     >
     <Promo :sticker="product.stickers[0].text" :type="product.stickers[0].type" />
     <b-link href="#" class="card-link">
-      <div class="img">
-        <b-card-img :src="product.image" alt="Image" class="rounded-0"></b-card-img>
+      <div class="img-container">
+        <b-card-img :src="product.image" alt="Image" class="rounded-0 img"></b-card-img>
       </div>
     </b-link>
 
@@ -43,6 +43,18 @@
       </div>
       <div class="price">
         {{product.prices.rrc.price}} руб.
+      </div>
+    </div>
+
+    <div class="prices-sm">
+      <div class="old-price">
+       {{product.prices.rrc.price}} руб.
+      </div>
+      <div class="price">
+        <span>{{product.prices.opt.title}}:</span> {{product.prices.opt.price}} руб.
+      </div>
+      <div class="price" v-if="+discount > 0">
+        <span>Скидка:</span> {{discount}}%
       </div>
     </div>
 
@@ -83,7 +95,11 @@ export default {
     StarFill,
     StarEmpty
   },
-  computed: {},
+  computed: {
+    discount () {
+      return ((this.product.prices.rrc.price - this.product.prices.opt.price ) / this.product.prices.rrc.price * 100).toFixed()
+    }
+  },
   mounted () {},
   methods: {},
 };
@@ -94,7 +110,7 @@ export default {
     max-width: 300px;
     min-height: 630px;
     margin: 0 0.5rem 0 0.5rem;
-    .img{
+    .img-container{
       overflow: hidden;
       height: 275px;
     }
@@ -132,6 +148,10 @@ export default {
         color: #000000;
       }
     }
+    .prices-sm{
+      display: none;
+
+    }
     .button-buy{
       display: flex;
       flex-direction: row;
@@ -160,6 +180,88 @@ export default {
         }
     }
   }
+
+  @media screen and (max-width: 390px) {
+  .card {
+    min-height: 400px;
+    .img-container {
+      height: 150px;
+      overflow: unset;
+      display: flex;
+      justify-content: center;
+      .img{
+        width: 120px;
+      }
+    }
+    .article{
+     text-align: center;
+     margin-bottom: 0.5rem;
+    }
+    .link{
+      text-align: center;
+      .name{
+      font-size: 18px;
+      line-height: 24px;
+      }
+    }
+    .raiting{
+      display: none !important;
+    }
+    .prices{
+      display: none;
+    }
+    .prices-sm{
+      margin: 15px 0 20px 0;
+      display: flex;
+      flex-direction: column;
+      .old-price{
+        color: black;
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 28px;
+      }
+      .price{
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 28px;
+        color: #000000;
+        span{
+          font-size: 20px;
+          color: #959595;
+        }
+      }
+    }
+    .button-buy{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      bottom: 30px;
+      margin-left: 12rem;
+      flex-direction: column-reverse;
+        .buy{
+          background: #2E3B6E;
+          border-radius: 10px;
+          width: 60px;
+          height: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .like {
+          margin-bottom: 15rem;
+          display: flex;
+          flex-direction: column;
+          margin-left: 40px;
+          gap: 20px;
+          .item{
+            background: white;
+            border: none;
+            padding: 0;
+          }
+        }
+    }
+  }
+}
 
 
 </style>
